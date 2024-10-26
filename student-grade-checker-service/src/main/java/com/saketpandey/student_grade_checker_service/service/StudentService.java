@@ -54,9 +54,8 @@ public class StudentService {
         return false;
     }
 
-    public Student findByEmail(String email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByEmail'");
+    public Optional<Student> findByEmail(String email) {
+        return studentRepository.findByEmail(email);
     }
 
     public List<Student> allUsers() {
@@ -68,7 +67,6 @@ public class StudentService {
     }
 
     public Optional<Student> getStudentById(Long studentId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getStudentById'");
+        return studentRepository.findById(studentId);
     }
 }

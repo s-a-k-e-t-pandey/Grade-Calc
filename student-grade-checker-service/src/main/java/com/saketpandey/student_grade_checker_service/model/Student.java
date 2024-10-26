@@ -38,10 +38,10 @@ public class Student implements UserDetails {
     @Column(name = "gpa")
     private Double gpa;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student", cascade = CascadeType.ALL)
     private Set<Grade> grades = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "student_courses",
         joinColumns = @JoinColumn(name = "student_id"),

@@ -9,7 +9,7 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long courseId;
 
     @Column(nullable = false)
     private String courseName;
@@ -20,9 +20,18 @@ public class Course {
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Grade> grades = new ArrayList<>();
 
+    public Course() {
+    }
+
+    public Course(Long courseId, String courseName) {
+        this.courseId = courseId;
+        this.courseName = courseName;
+    }
+
+
     // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() { return courseId; }
+    public void setId(Long courseId) { this.courseId = courseId; }
 
     public String getCourseName() { return courseName; }
     public void setCourseName(String courseName) { this.courseName = courseName; }
