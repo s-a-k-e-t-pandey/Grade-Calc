@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.saketpandey.student_grade_checker_service.model.Grade;
 import com.saketpandey.student_grade_checker_service.model.Student;
 import com.saketpandey.student_grade_checker_service.repository.StudentRepository;
 
@@ -18,6 +19,10 @@ public class StudentService {
 
     @Autowired
     private final StudentRepository studentRepository;
+
+
+    @Autowired
+    private GradeService gradeService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;  // Used to hash passwords
@@ -69,4 +74,22 @@ public class StudentService {
     public Optional<Student> getStudentById(Long studentId) {
         return studentRepository.findById(studentId);
     }
+
+    public double calculateCgpa(Long studentId) {
+    List<Grade> grades = gradeService.getGradesByStudentId(studentId);
+
+    int totalCreditHours = 0;
+    double weightedGradeSum = 0;
+
+    for (Grade grade : grades) {
+        int creditHours = grade.getCourse().getCreditHours();
+        int gradeValue = Integer.parseInt(grade.getGradeValue());
+
+        weightedGradeSum += gradeValue * creditHours;
+        totalCreditHours += creditHours;
+    }
+
+    return totalCreditHours == 0 ? 0 : weightedGradeSum / totalCreditHours;
+}
+
 }

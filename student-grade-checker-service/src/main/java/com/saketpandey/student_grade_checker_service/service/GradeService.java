@@ -27,7 +27,7 @@ public class GradeService {
     public void addGradeToStudent(Student student, GradeDTO gradeDto) {
         // Check if the grade for this courseId already exists for the student
         Grade existingGrade = gradeRepository.findByStudentIdAndCourseId(student.getId(), gradeDto.getCourseId());
-
+    
         if (existingGrade != null) {
             // Update the existing grade
             existingGrade.setGradeValue(String.valueOf(gradeDto.getGrade()));
@@ -36,10 +36,16 @@ public class GradeService {
             // Create a new grade
             Grade newGrade = new Grade();
             newGrade.setStudent(student);
-            newGrade.setCourse(new Course(gradeDto.getCourseId(), gradeDto.getCourseName())); // Assuming Course constructor takes courseId and courseName
+            
+            // Fetch course from database to ensure consistency or provide default values
+            Course course = courseRepository.findById(gradeDto.getCourseId()).orElse(
+                new Course(gradeDto.getCourseId(), gradeDto.getCourseName(), 3) // Default credit hours
+            );
+            newGrade.setCourse(course);
             newGrade.setGradeValue(String.valueOf(gradeDto.getGrade()));
             gradeRepository.save(newGrade);
         }
     }
+    
     
 }

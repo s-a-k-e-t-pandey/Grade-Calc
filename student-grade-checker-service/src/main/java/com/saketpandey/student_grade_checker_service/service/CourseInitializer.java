@@ -19,13 +19,14 @@ public class CourseInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         if (courseRepository.count() == 0) {
             courseRepository.saveAll(List.of(
-                new Course(1L, "Mathematics"),
-                new Course(2L, "Computer Science"),
-                new Course(3L, "Physics"),
-                new Course(4L, "Chemistry"),
-                new Course(5L, "AI ML"),
-                new Course(6L, "Data Structures")
+                new Course(1L, "Mathematics", 4),
+                new Course(2L, "Computer Science", 5),
+                new Course(3L, "Physics", 4),
+                new Course(4L, "Chemistry", 3), // Default credit hours of 3
+                new Course(5L, "AI ML", 3),
+                new Course(6L, "Data Structures", 4)
             ));
         }
     }
 }
+

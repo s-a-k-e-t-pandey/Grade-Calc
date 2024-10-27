@@ -19,6 +19,8 @@ public class GradeDTO {
 
     private String courseName;
 
+    private Integer creditHours; // Add this field
+
     // No-argument constructor for deserialization
     public GradeDTO() {}
 
@@ -29,10 +31,11 @@ public class GradeDTO {
         this.grade = Integer.parseInt(grade.getGradeValue());
     }
 
-    public GradeDTO(Long courseId, String courseName, Integer grade) {
+    public GradeDTO(Long courseId, String courseName, Integer grade, Integer creditHours) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.grade = grade;
+        this.creditHours = creditHours;
     }
 
     // Getters and Setters
@@ -60,12 +63,19 @@ public class GradeDTO {
         this.courseName = courseName;
     }
 
+    public Integer getCreditHours() {
+        return creditHours;
+    }
+
+    public void setCreditHours(Integer creditHours) {
+        this.creditHours = creditHours;
+    }
+
     // Convert DTO to Entity
     public Grade toGrade(Course course) {
         Grade gradeEntity = new Grade();
         gradeEntity.setCourse(course);
         gradeEntity.setGradeValue(String.valueOf(this.grade));
-        // gradeEntity.setCreditHours(this.creditHours);
         return gradeEntity;
     }
 }

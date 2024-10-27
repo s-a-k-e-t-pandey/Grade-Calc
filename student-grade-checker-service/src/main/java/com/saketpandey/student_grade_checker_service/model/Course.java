@@ -14,6 +14,10 @@ public class Course {
     @Column(nullable = false)
     private String courseName;
 
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 3")
+    private Integer creditHours;
+
+
     @ManyToMany(mappedBy = "courses")
     private List<Student> students = new ArrayList<>();
 
@@ -26,6 +30,13 @@ public class Course {
     public Course(Long courseId, String courseName) {
         this.courseId = courseId;
         this.courseName = courseName;
+        this.creditHours =  4; // Default value of 3
+    }
+
+    public Course(Long courseId, String courseName, Integer creditHours) {
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.creditHours = creditHours;
     }
 
 
@@ -41,4 +52,12 @@ public class Course {
 
     public List<Grade> getGrades() { return grades; }
     public void setGrades(List<Grade> grades) { this.grades = grades; }
+
+    public int getCreditHours() {
+        return creditHours;
+    }
+
+    public void setCreditHours(int creditHours) {
+        this.creditHours = creditHours;
+    }
 }

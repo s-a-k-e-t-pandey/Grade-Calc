@@ -8,7 +8,7 @@ import javax.validation.constraints.Max;
 public class CourseDTO {
 
     @NotNull(message = "Course ID cannot be null")
-    private Long id;
+    private Long courseId;
 
     @NotBlank(message = "Course name cannot be blank")
     private String courseName;
@@ -19,7 +19,7 @@ public class CourseDTO {
     @NotNull(message = "Credits cannot be null")
     @Min(value = 1, message = "Minimum credits should be 1")
     @Max(value = 10, message = "Maximum credits should be 10")
-    private Integer credits;
+    private Integer creditHours;
 
     @NotBlank(message = "Instructor name cannot be blank")
     private String instructorName;
@@ -28,22 +28,28 @@ public class CourseDTO {
     public CourseDTO() {
     }
 
+    public CourseDTO(Long courseId, String courseName, Integer creditHours) {
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.creditHours = creditHours;
+    }
+
     // Parameterized constructor
-    public CourseDTO(Long id, String courseName, String courseCode, Integer credits, String instructorName) {
-        this.id = id;
+    public CourseDTO(Long courseId, String courseName, String courseCode, Integer creditHours, String instructorName) {
+        this.courseId = courseId;
         this.courseName = courseName;
         this.courseCode = courseCode;
-        this.credits = credits;
+        this.creditHours = creditHours;
         this.instructorName = instructorName;
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
+    public Long getCourseId() {
+        return courseId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
     }
 
     public String getCourseName() {
@@ -62,12 +68,12 @@ public class CourseDTO {
         this.courseCode = courseCode;
     }
 
-    public Integer getCredits() {
-        return credits;
+    public Integer getCreditHours() {
+        return creditHours;
     }
 
-    public void setCredits(Integer credits) {
-        this.credits = credits;
+    public void setCreditHours(Integer creditHours) {
+        this.creditHours = creditHours;
     }
 
     public String getInstructorName() {

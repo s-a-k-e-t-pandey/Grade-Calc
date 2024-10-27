@@ -18,4 +18,5 @@ public class CourseService {
         course.setCourseName(courseDTO.getCourseName());
         return courseRepository.save(course);
     }
+
 }
